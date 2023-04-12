@@ -1,0 +1,239 @@
+@import "../styles.less";
+
+
+div {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.Itemcard {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.Itemcard-playing {
+    color: #ffffff;
+}
+
+.Itemcard, .Itemcard-playing {
+    border-radius: 5px;
+    width: 80vw;
+    height: 70px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.Itemcard, .Itemcard-playing {
+    background-color: #1c1c1c;
+    align-items: center;
+    overflow: hidden;
+    
+    transition: color 50ms ease-out;
+    transition: background-color 50ms ease-out;
+    transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+
+    position: relative;
+}
+
+.Itemcard:hover, .Itemcard-playing:hover {
+    background-color: #202020;
+    
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+
+    button {
+        display: block;
+    }
+}
+
+.Itemcard:active, .Itemcard-playing:active {
+    background-color: #191919;
+    box-shadow: none;
+}
+
+.Itemcard:active:focus-within {
+    background-color: #202020;
+    
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+}
+
+.Itemcard:has(> .buttons .option:focus), .Itemcard-playing:has(> .buttons .option:focus) {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #202020;
+
+    .buttons * {
+        display: block;
+    }
+}
+
+.index {
+    width: 6%;
+    font-size: 18px;
+    box-sizing: border-box;
+    text-align: right;
+    padding-right: 25px;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    top: 5px;
+    left: 10%;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.details {
+    font-size: 16px;
+    margin-left: 20px;
+    width: 60%;
+    height: 40%;
+    display: flex;
+    font-weight: normal;
+    align-items: center;
+}
+
+.title {
+    margin-right: 10%;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    box-sizing: border-box;
+    text-align: left;
+    mask-image: linear-gradient(to left, transparent, #000 50px, #000);
+}
+  
+.duration {
+    margin-left: auto;
+    text-align: right;
+}
+
+.state {
+    margin-left: 20px;
+    display: none;
+}
+
+.state-playing {
+    margin-left: 20px;
+    display: block;
+}
+
+span {
+    width: 20%;
+    height: 100%;
+    right: 0px;
+    display: flex;
+
+    position: absolute;
+    align-items: center;
+}
+
+.buttons button {
+    color: rgba(255, 255, 255, 0.4);
+    display: none;
+    background: none;
+    border: none;
+
+    position: relative;
+
+    transition: color 100ms ease-out;
+    margin-left: 20px;
+    margin-right: 10px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.buttons button:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.buttons button:active {
+    color: rgba(255, 255, 255, 1.0);
+}
+
+.buttons .liked {
+    color: #e35a70;
+    display: block;
+}
+
+.buttons .like, .buttons .liked {
+    font-family: 'BrowalliaUPC';
+    left: 0;
+    font-size: 22px;
+}
+
+.buttons .liked:hover {
+    color: #f18496;
+}
+
+.buttons .liked:active {
+    color: #a0263a;
+}
+
+.buttons .dragable {
+    margin-top: 4px;
+    font-family: 'BrowalliaUPC';
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.buttons .dragable:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.buttons .option {
+    font-family: 'Cascadia';
+    font-size: 25px;
+    margin-right: auto;
+}
+
+.cdk-drag-preview {
+    /* From https://css.glass */
+    background-color: rgba(37, 37, 37, 0.5);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    transition: transform 10ms;
+    transition: background-color 250ms cubic-bezier(0, 0, 0.2, 1);
+    animation: fade 50ms forwards;
+
+    button {
+        display: block;
+    }
+
+    .buttons .dragable {
+        color: rgba(255, 255, 255, 1.0);
+    }
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes fade {
+    from {
+        background-color: #202020;
+    }
+    to {
+        background-color: rgba(37, 37, 37, 0.5);
+    }
+}

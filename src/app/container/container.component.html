@@ -1,0 +1,19 @@
+<section class="container">
+    <div cdkDropList 
+    (cdkDropListDropped)="OnDrop($event)" 
+    [cdkContextMenuTriggerFor]="TrigArea" 
+    class="scrollbar">
+        <app-trackcard *ngFor="let track of Player.Queue; let i = index" 
+            [_index]="i + 1"
+            [title]="track.title"
+            [duration]="track.duration"
+            [thumbnail]="track.thumbnail">
+        </app-trackcard>
+    </div>
+</section>
+
+<ng-template #TrigArea>
+    <div cdkMenu class="ContextMenu">
+        <button cdkMenuItem class="ContextMenu-Item" (click)="Player.Clear()" (contextmenu)="false">Clear Queue</button>
+    </div>
+</ng-template>

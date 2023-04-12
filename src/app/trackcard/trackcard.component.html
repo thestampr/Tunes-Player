@@ -1,0 +1,48 @@
+<div cdkDrag 
+cdkDragLockAxis="y" 
+(cdkDragStarted)="OnDrag($event)" 
+[cdkContextMenuTriggerFor]="TrigArea"
+class="Itemcard" 
+(click)="OnClick($event)" 
+id="Itemcard" 
+[ngClass]="{'Itemcard': !is_playing, 'Itemcard-playing': is_playing}">
+    <div class="index" id="item-index">{{_index}}</div>
+    <div class="thumbnail" id="item-thumbnail">
+        <img src={{thumbnail}} alt="Music Thumbnail" draggable="false">
+    </div>
+    <div class="details" id="item-details">
+        <div class="title" id="item-title">{{title}}</div>
+        <div class="duration" id="item-duration">{{duration}}</div>
+    </div>
+    <div class="state" id="item-state" [ngClass]="{'state': !is_playing, 'state-playing': is_playing}">left</div>
+    <span class="buttons">
+        <button class="like" id="item-likebtn" (click)="OnLikeClick($event)" [ngClass]="{'liked': track.is_liked, 'like': !track.is_liked}">❤</button>
+        <button class="option" [cdkMenuTriggerFor]="TrigArea" id="item-optionbtn" (click)="OnOptionClick($event)">⋯</button>
+        <button cdkDragHandle class="dragable" id="item-dragbtn" (click)="OnDragClick($event)">≡</button>
+    </span>
+</div>
+
+<ng-template #TrigArea>
+    <div cdkMenu class="ContextMenu">
+        <button cdkMenuItem class="ContextMenu-Item" (click)="OnClick($event)" (contextmenu)="false">Play</button>
+        <!-- <button cdkMenuItem class="ContextMenu-Item" (click)="OnLikeClick($event)" (contextmenu)="false">{{track.is_liked? "Unlike" : "Like"}}</button> -->
+        <button cdkMenuItem class="ContextMenu-Item" (click)="Player.RemoveTrack(track)" (contextmenu)="false">Remove</button>
+        <div class="ContextMenu-Separator"></div>
+        <button cdkMenuItem 
+        class="ContextMenu-Item" 
+        (contextmenu)="false" 
+        [cdkMenuTriggerFor]="Playlist">
+            Add to playlist<span class="ContextMenu-Span">▸</span>
+        </button>
+        <div class="ContextMenu-Separator"></div>
+        <button cdkMenuItem class="ContextMenu-Item" (contextmenu)="false">Share</button>
+    </div>
+</ng-template>
+
+<ng-template #Playlist>
+    <div cdkMenu class="ContextMenu">
+        <button cdkMenuItem class="ContextMenu-Item" (contextmenu)="false">Playlist</button>
+        <button cdkMenuItem class="ContextMenu-Item" (contextmenu)="false">Awesome!</button>
+        <button cdkMenuItem class="ContextMenu-Item" (contextmenu)="false">Music</button>
+    </div>
+</ng-template>
